@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			li{
+				list-style: none;
+			}
+			section{
+				padding: 40px;
+				width: 820px;
+				height: 420px;
+				border: 1px solid #BBBBBB;
+				background:#F4F4F4 ;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+			}
+			section>div{
+				overflow:hidden;
+				clear:both;
+				height: auto;
+				margin-bottom: 20px;
+			}
+			section>div>ul{
+				overflow:hidden;clear:both;
+				height:auto;
+			}
+			section>div>ul>li{
+				padding: 0px 10px;
+				width:auto;
+				height:40px ;
+				border: 1px solid #BBBBBB;
+				margin-right: 20px;
+				margin-top: 20px;
+				float: left;
+				background: #FFFFFF;
+				border-radius: 5px;
+			}
+			section>div>ul>li:nth-child(1){
+				margin-left: 0px;
+			}
+			section>div>ul>li>img{
+				display: block;
+				width: 20px;
+				height: 20px;
+				float: left;
+				margin-top: 10px;
+				margin-left: 10px;
+			}
+			section>div>ul>li>img:nth-child(1){
+				margin-left: 0px;
+			}
+			section>div>ul>li>img:nth-child(3){
+				cursor: pointer;
+			}
+			section>div>ul>li>span{
+				display: block;
+				width: auto;
+				height: auto;
+				float: left;
+				margin-top: 7px;
+				margin-left: 10px;
+				color: #423620;
+				font-weight: 600;
+			}
+			section>h1{
+				color: #4B4428;
+				margin-bottom: 10px;
+			}
+			section>span{
+				display: block;
+				color:#423620 ;
+				margin-bottom:20px;
+			}
+			section>.btn{
+				width: 100%;
+				height: 45px;
+			}
+			section>.btn>input{
+				
+				width: 460px;
+				height: 45px;
+				background: #E3E3E3;
+				outline:none;  
+				border:none;
+				font-size: 30px;
+				border-radius: 5px;
+				float: left;
+			}
+			section>.btn>button{
+				width: 60px;
+				height: 45px;
+				border: 1px solid #E3E3E3;
+				
+				margin-left: 20px;
+				border-radius: 5px;
+				display: block;
+				float: left;
+				outline: none;
+				cursor: pointer;
+			}
+		</style>
+		<script src="jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<section>
+			<h1>你的技能</h1>
+			<span>把你的10个技能标签加在你的个人资料上</span>
+		 	<div>
+				<ul></ul>
+			</div>
+			<div class="btn">
+			<input type="text" name="" id="text" value="" />
+			<button type="button">添加</button>
+			</div>
+			
+		</section>
+		<script type="text/javascript">
+			$(function(){
+				class Run {
+					constructor(obj) {
+						this.obj=obj
+					}
+					init(){
+						var res=localStorage.getItem('jn')
+						res=JSON.parse(res)
+						if(res!=null){
+							for(var i in res){
+								$('section>div').eq(0).find('ul').append(`<li>
+								<img src="1.png" >
+								<span>${res[i]}</span>
+								<img src="2.png" >
+							    </li>`)
+							}
+							
+						}
+						this.creatClick()
+						this.creatKeydown()
+						this.remove()
+					}
+					creatClick(){
+						 $('.btn>button').on('click',function(){
+							var res=$('#text').val()
+							if(res!=''){
+								var arr=[]
+							var tx=localStorage.getItem('jn')
+							if(tx===null){
+								arr.push(res)
+								localStorage.setItem('jn',JSON.stringify(arr)) 
+							}else{
+								tx=JSON.parse(tx)
+								tx.push(res)
+								 localStorage.setItem('jn',JSON.stringify(tx))
+							}
+							$('#text').val('')
+							$('section>div').eq(0).find('ul').append(`<li>
+								<img src="1.png" >
+								<span>${res}</span>
+								<img src="2.png" >
+							</li>`)
+							}
+							
+						}) 
+					}
+					creatKeydown(){
+						$(window).keydown(function(e){
+							if(e.keyCode===13){
+								var res=$('#text').val()
+								var arr=[]
+								var tx=localStorage.getItem('jn')
+								if(tx===null){
+									arr.push(res)
+									localStorage.setItem('jn',JSON.stringify(arr)) 
+								}else{
+									tx=JSON.parse(tx)
+									tx.push(res)
+									 localStorage.setItem('jn',JSON.stringify(tx))
+								}
+								if(res!=''){
+								$('#text').val('')
+								$('section>div').eq(0).find('ul').append(`<li>
+									<img src="1.png" >
+									<span>${res}</span>
+									<img src="2.png" >
+								</li>`)
+								}
+								
+							}
+							
+						})
+					}
+					remove(){
+						$('section>div').eq(0).find('ul').on('click','li',function(){
+						   
+							var arr=[]
+							var tx=$(this).find('span').text()
+							var res=localStorage.getItem('jn')
+							res=JSON.parse(res)
+							for(var i in res){
+								
+								if(tx!=res[i]){
+								  arr.push(res[i])
+								}
+							}
+							localStorage.setItem('jn',JSON.stringify(arr))
+							$(this).remove() 
+						})
+					}
+				}
+				var run=new Run('1')
+				run.init()
+			})
+		</script>
+	</body>
+</html>
