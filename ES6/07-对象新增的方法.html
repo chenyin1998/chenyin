@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// console.log(undefined === null);//false
+			
+			// 特殊情况
+			console.log(+0 == -0);//true
+			console.log(+0 === -0);//true
+			console.log(Object.is(+0,-0));//false
+			
+			console.log(NaN == NaN)//false
+			console.log(NaN === NaN)//false
+			console.log(Object.is(NaN,NaN))//true
+			
+			// Object.assign()将一个对象copy到另一个对象中
+			var p = {
+				name:'翠花',
+				age:18,
+				friends:['老王','张三','王麻子']
+			}
+			
+			var p1 = {}
+			
+			// p1对象copy p对象的属性和方法,p是提供者,p1是接受者
+			Object.assign(p1,p)
+			
+			console.log(p1)//{name: "翠花", age: 18, friends: Array(3)}
+			
+			// 将p对象的friends属性添加一个值
+			p.friends.push('李四')
+			console.log(p1)//{name: "翠花", age: 18, friends: Array(4)}
+			
+			p1.friends.push('封颖');
+			console.log(p)
+			console.log(p1)
+			//注意:Object.assign()的这种copy(拷贝)是浅拷贝
+			// 浅拷贝指的是拷贝的属性的属性值不是基本数据类型(数组\对象)时,拷贝只是copy该对象的内存地址
+			
+			// Object.assign()可以同时拷贝多个对象
+			var p2 = {
+				name:'小红',
+				love:'小明'
+			}
+			
+			// p1具有多个提供者  
+			Object.assign(p1,p,p2);
+			console.log(p1)//{name: "小红", age: 18, friends: Array(5), love: "小明"}
+			
+		// 多个提供者,意味着后面的提供者若同名则覆盖前面的提供者的属性
+		
+		
+		// 补充:深拷贝
+		var Chinese = {
+			nation:'中国',
+			color:'黄种人',
+			citys:['重庆','四川','湖北','福建','新疆']
+		}
+		
+		// 定义一个函数实现深拷贝  
+		function deepCopy(obj,newObj){
+			var newObj = newObj || {} ;
+			
+			// 遍历对象
+			for(var i in obj){
+				// 先判断是否为对象或者数组
+				if(typeof obj[i] === 'object'){
+					newObj[i] = (obj[i].constructor === Array) ? [] : {}; 
+					
+					// 递归调用
+					deepCopy(obj[i],newObj[i])
+				}else{
+					newObj[i] = obj[i]
+				}
+			}
+			
+			return newObj;
+		}
+		
+		var Student = deepCopy(Chinese)
+		console.log(Student);
+		
+		Student.citys.push('内蒙古')
+		console.log(Chinese)
+		console.log(Student)
+		
+		Chinese.citys.push('广州')
+		console.log(Student)
+		</script>
+	</body>
+</html>

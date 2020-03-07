@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button>按钮</button>
+		<script>
+			var btn = document.getElementsByTagName('button')[0];
+			
+			// ES5的写法
+			btn.onclick = function(){
+				// console.log(this)
+				var that = this;
+				// 定时器  2s后输出   反应迟钝
+				setTimeout(function(){
+					// console.log('反应迟钝')
+					console.log(this)//window
+					console.log(that);//btn
+				},2000)
+			}
+			
+			// ES6 箭头函数
+			btn.onclick = function(){
+				// setTimeout(()=>{
+				// 	console.log(this);//btn按钮
+				// },2000)
+				
+				var arr = [1,2,3,4];
+				arr.forEach((val)=>{
+					console.log(val)
+					console.log(this)
+				})
+			}
+			
+			
+			// 箭头函数可以让this指向固定化,这样有利于面向对象封装回调函数
+
+			function Dog(name,color){
+				this.name = name;
+				this.color = color;
+				// this.doSomething = function(){
+				// 	document.onclick = ()=>{
+				// 		console.log(this)//Dog
+				// 		console.log(this.color)
+				// 	}
+				// }
+			}
+			
+			Dog.prototype.doSomething = function(){
+				document.onclick =()=>{
+					console.log(this)//Dog
+					console.log(this.color)
+				}
+			}
+			
+			var dog = new Dog('大黄','yellow');
+			console.log(dog)
+			dog.doSomething()//yellow
+			
+			
+			function demo(arg){
+				// 箭头函数中没有自己的arguments
+				return ()=>{console.log(arguments)}
+			}
+			var res = demo(12);
+			res();//12
+		</script>
+	</body>
+</html>

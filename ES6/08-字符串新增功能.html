@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li>111</li>
+				<li>222</li>
+			</ul>
+		</div>
+		<script>
+			var msg = 'hello world';
+			
+			console.log(msg.includes('hello'))//true
+			console.log(msg.startsWith('h'));//true
+			console.log(msg.endsWith('d'));//true
+			
+			// index  从0开始计算
+			console.log(msg.includes('he',5));//false
+			console.log(msg.startsWith('o',4));//true
+			
+			// endsWith的第二个参数为长度   从1开始计算
+			console.log(msg.endsWith('e',2));//true
+			
+			// repeat()方法
+			console.log('a'.repeat(3));//aaa
+			
+			
+			// 模板字面量
+			//使用字符串模板语法来创建字面量
+			var str = `hello world "世界，您好！"`
+			console.log(str)
+			console.log(typeof str)
+			
+			// 多行字符串
+			var str = "abc\
+			def"
+			console.log(str)//输出结果但是不换行
+			
+			// ES6中通过模板字面量去实现多行字符串
+			var str1 = `ab
+			cd
+			ef`;
+			console.log(str1)
+			
+			var str = `<div id="box">
+					<ul>
+						<li>111</li>
+						<li>222</li>
+					</ul>
+				</div>`;	
+			console.log(str);
+			
+			
+			// 字符串的置换
+			var obj = {
+				name:'朱维',
+				say:'一天不学习，浑身难受',
+				date:'2020-03-03'	
+			}
+			
+			// ES5   通过+连接符让变量和字符串拼接
+			var str = obj.name+'在'+obj.date+'说:"'+obj.say+'"';
+			console.log(str)//朱维在2020-03-03说:"一天不学习，浑身难受"
+			
+			// ES6 
+			var str = `${obj.name}在${obj.date}说:"${obj.say}"`;
+			console.log(str)
+			
+			// 模板标签
+			// alert('女朋友')
+			
+			// 等同于
+			// alert`男朋友`
+			
+			// 自定义模板标签
+			// 标签函数一般需要使用未命名参数定义   ...剩余参数接受所有模板字符串中的变量
+			function myTag(str,...value){
+				//str 拿到除了变量以外的字符
+				console.log(str)//
+				
+				// 剩余参数拿到所有字符串中的变量,以数组的方式返回
+				console.log(value)//["黄成娜", 18]
+			}
+			var name = '黄成娜'
+			var age = 18
+			
+			myTag`${name}今年${age}`;
+		</script>
+	</body>
+</html>

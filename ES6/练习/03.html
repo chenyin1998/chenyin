@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 3.3默认值为表达式和函数
+			function getValue(){
+				return 5;
+			}
+			// var data = getValue();
+			
+			function add(first,seconed=getValue()){
+				return first+seconed;
+			}
+			
+			var res = add(1)
+			console.log(res)//6
+			
+			/* 
+				注意：getValue()只会在调用add函数且不传入第二个参数时才会去调用
+			 */
+			
+			//由于默认值可以是表达式,所以我们可以使用前面的参数作为后面参数的默认值,反之则不成立(不能采用后面的参数定义表达式作为参数默认值)
+			function add(first=1,seconed=first+1){
+				return first + seconed;
+			}
+			
+			var res = add(3);
+			console.log(res)//7
+			
+			var res = add();
+			console.log(res);//3
+			
+			// 3.4未命名参数
+			function foo(a,b){
+				console.log(arguments)//[1, 2, 3]
+				console.log(arguments[2])
+			}
+			foo(1,2,3);
+			
+			// ES6新增的剩余参数   ...接收剩余参数
+			function foo(a,b,...c){
+				// arguments接收所有传入的实参
+				console.log(arguments)//[1,2,3,4,5]
+				
+				// ...剩余参数只接收剩余的形参
+				console.log(c);//[3,4,5]
+			}
+			foo(1,2,3,4,5);
+			
+			
+			//3.5 扩展运算符 
+			var arr = [4,7,1,6,9];
+			var max = Math.max(arr);
+			console.log(max);//NaN   Math.max()不能传入一个数组
+			
+			// ES5中只能通过apply等去切换对象 apply(obj,arr)
+			var max = Math.max.apply(Math,arr)
+			console.log(max)//9
+			
+			// ES6提供了更便捷的方法:结构解析   ...扩展原算法
+			var max = Math.max(...arr);
+			console.log(max)//9
+			
+			//扩展运算符相当于拆散了数组或者对象
+			console.log(...arr)//4 7 1 6 9
+			
+			
+			var arr = ['hello','world'];
+			var arr2 = [1,2,3,4,5,...arr];
+			console.log(arr2);//[1, 2, 3, 4, 5, "hello", "world"]
+			
+			
+			// 对象的继承     非构造函数继承:浅拷贝  深拷贝
+			var obj = {
+				name:'小明',
+				age:18
+			}
+			
+			var msg = {
+				...obj,
+				name:'小红',
+				address:'重庆粤嵌',
+				sex:'男'
+				
+			}
+			
+			console.log(msg);//{name: "小红", age: 18, address: "重庆粤嵌", sex: "男"}
+			
+			
+			// 3.6结构赋值
+			var arr = [1,3,5];
+			var a = arr[0];
+			var b = arr[1];
+			var c = arr[2];
+			console.log(a,b,c)
+			
+			// 数组右边的值赋值给左侧的变量
+			var arr = [2,4,6];
+			var [a,b,c] = arr;
+			console.log(a,b,c)//2 4 6
+			
+			var [d,,e] = arr;
+			console.log(d,e)//2  6
+		</script>
+	</body>
+</html>

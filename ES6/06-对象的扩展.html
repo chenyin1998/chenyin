@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			
+			// 简写属性初始化
+			var name = '张千印';
+			var age = 20;
+			
+			// ES5
+			// var obj = {
+			// 	name:name,
+			// 	age:age
+			// }
+			// console.log(obj)//{name: "张千印", age: 20}
+			
+			// ES6简写
+			var obj = {
+				name,//name:name
+				age//age:age
+			}
+			console.log(obj)//{name: "张千印", age: 20}
+			
+			// ES5
+			var person = {
+				name:'张三',
+				init:function(){
+					console.log('我是对象的方法')
+				}
+			}
+			person.init()
+			
+			// ES6
+			var person = {
+				name:'张三',
+				// 省略冒号和function   方法更加简洁
+				init(){
+					console.log('我是对象方法简写')
+				}
+			}
+			
+			// 属性名提前调用
+			// 将属性名定义为变量
+			var value = 'GEC-VERY-VERY-IMPORT-VALUE'
+			var func = 'GEC-VERY-VERY-IMPORT-FUNCTION'
+			var obj = {
+				[value]:10,
+				[func]:20
+			}
+			console.log(obj)
+			//{GEC-VERY-VERY-IMPORT-VALUE: 10, GEC-VERY-VERY-IMPORT-FUNCTION: 20}
+		</script>
+	</body>
+</html>

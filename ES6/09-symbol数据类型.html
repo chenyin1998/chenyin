@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// 创建symbol
+			var a1 = Symbol();
+			console.log(a1)//Symbol()
+			console.log(typeof a1)//symbol
+			
+			var person = {}
+			person[a1] = '房鑫宇';
+			console.log(person)//{Symbol(): "房鑫宇"}
+			
+			// Symbol每次会创建一个独一无二的值
+			console.log(person[Symbol()])///undefined
+			console.log(person[a1])//房鑫宇
+			
+			// 添加字符串进行描述
+			var s1 = Symbol('冯晓齐')
+			var s2 = Symbol('朱维')
+			console.log(s1 === s2);//false
+			
+			var s1 = Symbol('张千印')
+			var s2 = Symbol('张千印')
+			console.log(s1 === s2)//false
+			
+			// 7.3symbol作为属性
+			var a = Symbol('abc');
+			var b = Symbol('abc');
+			
+			// 方法一:
+			var person = {
+				// 变量名作为属性   需要添加中括号
+				[a]:'黄成娜',
+				age:18
+			}
+			
+			
+			// 方法二
+			person[b] = '任勇';
+			console.log(person)//{age: 18, Symbol(abc): "黄成娜", Symbol(abc): "任勇"}
+			console.log(person[b]);//任勇  此时可以访问,仍然为公有属性
+			
+			// 对象使用for...in  或者for...of遍历
+			for(var key in person){
+				console.log(key)//age
+				console.log(person[key])
+			}
+		
+			var symbols = Object.getOwnPropertySymbols(person);
+			console.log(symbols)// [Symbol(abc), Symbol(abc)]
+			
+			console.log(person[symbols[0]])//黄成娜
+			console.log(person[symbols[1]])//任勇
+			
+			// Reflect.ownKeys()获取所有的属性(包括常规属性)
+			console.log(Reflect.ownKeys(person))//["age", Symbol(abc), Symbol(abc)]
+			
+			
+			// 7.5 symbol.for()
+			
+			// 创建一个symbol 但是不向全局注册
+			var a = Symbol('foo');
+	
+			// 第一次symbol.for会向全局搜索字符串为foo的symbol
+			// 没找到字符串为foo的symbol,则创建一个symbol,并向全局注册
+			var b = Symbol.for('foo');
+			
+			console.log(a===b);//false
+			
+			// 第二次在全局环境中搜索字符串为foo的全局symbol,并将其返回
+			// (没有单独创建，只是将全局的进行返回)
+			var c = Symbol.for('foo');
+			console.log(b===c);//true
+			
+			
+			// Symbol.keyFor()返回已注册到全局的Symbol的key(描述字符串)
+			var a1 = Symbol('bar');
+			var b1 = Symbol.for('bar');
+			
+			// 因为symbol创建的变量没有注册到全局,所有值为undefined
+			console.log(Symbol.keyFor(a1))//undefined
+			
+			// Symbol.for()创建symbol后会注册到全局
+			console.log(Symbol.keyFor(b1));//bar
+		</script>
+	</body>
+</html>

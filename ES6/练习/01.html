@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			li{
+				list-style: none;
+				width: 100px;
+				height: 50px;
+				background: #e4393c;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+		<script type="text/javascript">
+			function run(a=1,b=2,...c){
+				console.log(arguments)
+				console.log(c)
+				return a+b
+			}
+			var res=run(3,4,5,6,5,4)
+			console.log(res)
+			
+			var a={
+				name:'小明',
+				age:18,
+				height:160
+			}
+			var b={
+				...a,
+				name:'小红',
+			    sex:'女'
+			}
+			console.log(b)
+			var li=document.getElementsByTagName('li')[0]
+			
+			li.onclick=function(){
+				console.log(d)
+			}
+			/* let不存在变量提升 */
+			let d=0
+			console.log(d)
+			console.log(e)
+			var e=3
+			/* Es5中var声明的变量属于window对象 */
+			console.log(window.e)
+			/* Es6中let声明的变量不属于window对象 */
+			console.log(window.d)
+			// Es5中变量名可以重复
+			var e=50
+			console.log(e)
+			// Es6中变量名不能重复
+			// let d=10
+			// console.log(d)
+			// const是声明的常量且不可修改
+			// const key=1
+			// key=2
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// ES5定义构造函数
+			// function Dog(name,color){
+			// 	// 公有属性
+			// 	this.name = name;
+			// 	this.color = color;
+				
+			// 	//私有属性
+			// 	var age = 18;
+			// 	this.say = function(){
+			// 		console.log('汪汪汪~~~'+age)
+			// 	}
+			// }
+			// var dog = new Dog('大黄','黄色')
+			// console.log(dog)
+			// dog.say()
+			
+			// ES6中类的基本写法
+			// class Dog{
+			// 	constructor(name,color){
+			// 		this.name = name//this代表当前实例化对象
+			// 		this.color = color
+			// 	}
+			// 	toSay(){
+			// 		console.log(this.name+'汪汪汪~~~~')
+			// 	}
+			// 	toPlay(){
+					
+			// 	}
+			// }
+			
+			// var dog = new Dog('大黄','黄色')
+			// console.log(dog)
+			// dog.toSay()
+			
+			
+			// // 构造函数的prototype属性
+			// class Person{
+			// 	constructor(){}
+			// 	toSay(){}
+			// }
+			
+			// Person.prototype = {
+			// 	constructor(){},
+			// 	toSay(){}
+			// }
+			// console.log(Person)
+			
+		
+			// ES5写法
+			// function Game(){
+				
+			// }		
+			// Game.prototype.add = function(){
+				
+			// }	
+			// Game.prototype.isFinshed = function(){
+				
+			// }
+			
+			// 公有方法和私有方法的区分
+			//方法一:
+			// class Dog{
+			// 	//公共方法
+			// 	toSay(){
+			// 		console.log('公有方法')
+			// 	}
+			// 	//私有方法   给方法名加上_
+			// 	_goHome(){
+			// 		console.log()
+			// 	}
+			// }
+			
+			// 方法二:将私有的方法移除
+			// class Dog{
+			// 	constructor(name) {
+			// 	    this.name = name;
+			// 	}
+			// 	toSay(){
+			// 		console.log('汪汪~~~')
+					
+			// 		// apply   call   bind
+			// 		goHome.call(this)
+			// 	}
+			// }
+			
+			// // 该函数只在Dog内toSay方法调用
+			// function goHome(){
+			// 	console.log(this.name)
+			// 	console.log('你妈叫你回家吃饭啦！')
+			// }
+			
+			// var dog = new Dog('小黄');
+			// console.log(dog)
+			// dog.toSay()
+			
+			
+			// 方法三
+			// const foo = Symbol('foo');
+			// class Dog{
+			// 	//公有方法
+			// 	toSay(){
+			// 		console.log('汪汪汪~~~')
+			// 	}
+			// 	//私有方法
+			// 	[foo](){
+					
+			// 	}
+			// }
+			
+			// var dog = new Dog()
+			// console.log(dog)
+			
+			
+			// class Demo{
+			// 	constructor(name){
+			// 		this.name = name;
+			// 	}
+			// 	print(){
+			// 		console.log(this.name)
+			// 	}
+			// }
+			
+			// var demo = new Demo('瑶瑶姐');
+			// demo.print()//
+			
+			// // 结构赋值
+			// let {print} = demo
+			// // console.log(print)
+			// // print()//报错
+			
+			
+		class Demo{
+			constructor(name){
+				this.name = name;
+				this.print = ()=>{
+					console.log(this.name)
+				}
+			}
+		}
+		
+		var demo = new Demo('瑶瑶姐');
+		console.log(demo)
+		demo.print()
+		
+		// 结构赋值
+		let {print} = demo
+		// console.log(print)
+		print()//报错
+		
+		
+		class Animal{
+			constructor(name,color){
+				this.name = name;
+				this.color = color;
+			}
+			sayName(){
+				console.log(this.name)
+			}
+		}
+		
+		class Cat extends Animal{
+			// 若子类不需要添加新的属性,则不需要写构造函数
+			constructor(name,color,type){
+				// 调用父类的属性  super
+				super(name,color)
+				this.type = type;
+			}
+			toSay(){
+				//调用父类的方法必须使用super或者this
+				super.sayName()
+			}
+			
+		}
+		
+		var cat = new Cat('果冻','white','猫');
+		console.log(cat)//{name: "果冻", color: "white", type: "猫"}
+		cat.toSay()//果冻
+		cat.sayName()//果冻
+		</script>
+	</body>
+</html>

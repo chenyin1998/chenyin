@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// Set本身是一个构造函数   所有通过new进行实例化
+			var set = new Set();
+			console.log(set)//{}
+			console.log(typeof set)//object
+			
+			//set添加元素   add()方法
+			set.add('a');
+			set.add('b');
+			console.log(set)//{"a", "b"}
+			
+			// set的size属性为set中元素的个数(相当于数组中的length)
+			console.log(set.size);//2
+			
+			// set不能添加重复的元素
+			set.add('a');
+			console.log(set);//{"a", "b"}
+			console.log(set.size);//2
+			
+			set.add('c');
+			console.log(set)
+			
+			// 注意:在判断+0 -0时,是通过全等===来判断,所以不能重复添加
+			set.add(+0);
+			set.add(-0);
+			console.log(set)//{"a", "b", "c", 0}
+			
+			set.add('5')
+			set.add(5)
+			console.log(set)//两个都能够添加
+			
+			// 两个空数组或者对象不相等(存放在堆的数据虽然字面量相等，但是并不是指向同一片内存空间),所以可以添加
+			set.add([])
+			set.add([])
+			console.log(set.size);//8
+			
+			set.add({})
+			set.add({})
+			console.log(set.size)//10
+			
+			// 指向同一个内存空间则不能添加
+			var arr = ['张朋']
+			var arr1 = ['张朋']
+			var arr2 = arr;//arr2不能被添加   arr2和arr指向同一个内存空间
+			var set = new Set();
+			set.add(arr)
+			set.add(arr1)
+			set.add(arr2);
+			console.log(set)
+			
+			// 使用数组初始化set  可以去除数组中重复的值
+			var arrSet = new Set([2,3,3,1,2,2,4])
+			console.log(arrSet);//{2, 3, 1, 4}
+			
+			
+			// ES5中  判断一个值是否在数组中   indexOf  (补充)
+			var arr = ['朱维','黄成娜','钟小军'];
+			var index = arr.indexOf('瑶瑶姐');
+			console.log(index)//-1  -1说明该值不存在这个数组中
+			
+			// 判断Set中是否存在某一个值  has()
+			var arrSet = new Set([2,3,4])
+			console.log(arrSet.has(5))//false
+			console.log(arrSet.has(2))//true
+			
+			// 移除指定的值
+			arrSet.delete(3)
+			console.log(arrSet)// {2, 4}
+			
+			//清空所有的值
+			arrSet.clear()
+			console.log(arrSet);//{}
+			
+			// 遍历Set数据类型
+			var iSet = new Set(['黄成娜','钟小军','张千印','田胜红'])
+			console.log(iSet)
+			
+			iSet.forEach(function(val,key,ownSet){
+				console.log(val)//遍历出的set的值
+				// console.log(key)
+				// console.log(ownSet)
+				console.log(`val:${val},key:${key},set:${ownSet}`)
+			})
+			
+			// for...of遍历
+			for(val of iSet){
+				console.log(val)
+			}
+			
+			
+			var arr = [3,2,2,3,5,3,6,4,4,2];
+			
+			// 将数组转换为Set类型
+			// var arrSet = new Set(arr);
+			//  console.log(arrSet)//{3, 2, 5, 6, 4}
+			 
+			//  //将Set类型转换为数组
+			//  var newArr = [...arrSet];
+			//  console.log(newArr);
+			
+			function fun(arr){
+				var arrSet = new Set(arr);
+				return [...arrSet]
+			}
+	
+			var res = fun(arr)
+			console.log(res)//[3, 2, 5, 6, 4]
+		</script>
+	</body>
+</html>

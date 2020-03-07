@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+		     var promise
+		  function fo(){
+			  
+		  }
+			  
+			 async function fll(){
+				 console.log(222)
+			  promise=new Promise(function(resolve,reject){
+				  console.log(4444)
+					 setTimeout(function(){
+						
+						console.log(2)
+						resolve(3)
+					 },1000)
+				})
+				await promise.then(function(value){
+			 	 console.log(value)	
+			     })
+				 console.log('触发了')
+			 }
+		    fll()
+			  
+			 /* var flag = false;
+			 async function getData(){
+			     return  new Promise(function(resolve,reject){
+			     	// 模拟异步操作需要2s的时间
+			     	setTimeout(resolve,2000,'网络请求成功')
+			     })
+			 }
+			 			
+			 async function showAsync(){
+			     // 调用getData函数   注意getData是一个异步的函数
+			     //await代表必须等getData函数执行完毕之后才执行以下内容
+			   console.log(flag)
+			   await getData()
+			     .then((value)=>{
+			     	flag = true;
+			     	console.log('网络请求成功')
+			     },(error)=>{
+			     	console.log(error)
+			     })
+			     
+			     //getData异步的代码不会阻止后面代码的执行
+			     console.log(flag)
+			 }
+			 showAsync() */
+		</script>
+	</body>
+</html>

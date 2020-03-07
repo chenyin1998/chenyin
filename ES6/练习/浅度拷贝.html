@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	    <script type="text/javascript">
+	    	 var a={
+				name:'小明',
+				age:18,
+				citys:['重庆','上海','北京']
+			}
+			var a1={}
+			
+			Object.assign(a1,a)
+			console.log(a1)
+			a.citys.push('湖北')
+			a.name='小红'
+			console.log(a1) 
+			
+			var a={
+				name:'小明',
+				age:18,
+				citys:['重庆','上海','北京']
+			}
+			var b=a
+			console.log(b)
+			a.age=22
+			console.log(b)
+			var c=[]
+			for(var i=0;i<a.citys.length;i++){
+				c.push(a.citys[i])
+			}
+			a.citys='湖北'
+			console.log(c)
+			
+			
+			
+			
+			/* var b=a
+			b.name='小红'
+			console.log(b.name)
+			console.log(a.name)
+			var c=[1,2,3,4,5]
+			var d=c
+			c.push('x')
+			console.log(d) */
+			// 补充:深拷贝
+			var Chinese = {
+				nation:'中国',
+				color:'黄种人',
+				citys:['重庆','四川','湖北','福建','新疆']
+			}
+			
+			// 定义一个函数实现深拷贝  
+			function deepCopy(obj,newObj){
+				var newObj = newObj || {} ;
+				
+				// 遍历对象
+				for(var i in obj){
+					// 先判断是否为对象或者数组
+					if(typeof obj[i] === 'object'){
+						newObj[i] = (obj[i].constructor === Array) ? [] : {}; 
+						
+						// 递归调用
+						deepCopy(obj[i],newObj[i])
+					}else{
+						newObj[i] = obj[i]
+					}
+				}
+				
+				return newObj;
+			}
+			
+			var Student = deepCopy(Chinese)
+			console.log(Student);
+			
+			Student.citys.push('内蒙古')
+			console.log(Chinese)
+			console.log(Student)
+			
+			Chinese.citys.push('广州')
+			console.log(Student)
+	    </script>
+	</body>
+</html>

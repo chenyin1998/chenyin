@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			li{
+				list-style: none;
+			}
+			.box{
+				width: auto;
+				height: auto;
+				position: absolute;
+				top:50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+			}
+			.box>div{
+				width:100%;
+				height:54px;
+				line-height: 54px;
+				margin-top: 30px;
+			}
+			.box>div:nth-child(4){
+				margin-bottom: 50px;
+			}
+			div>span{
+				font-size: 30px;
+				color: black;
+				font-weight: 500;
+				float: left;
+			}
+			div>ul{
+				width: calc(100%-30px);
+				height: 100%;
+				float: left;
+				margin-left: 30px;
+			}
+			div>ul>li{
+				width: auto;
+				height: 50px;
+				float: left;
+				position: relative;
+				border: 2px solid #999999;
+				margin-left: 20px;
+				font-size: 25px;
+				text-align: center;
+				line-height: 50px;
+				color: #666666;
+				padding: 0px 10px;
+				cursor: pointer;
+			}
+			div>ul>li>img{
+				display: none;
+				position: absolute;
+				right: 0px;
+				bottom: 0px;
+			}
+			.price{
+				
+			}
+			.price>span:nth-child(2){
+				margin-left: 20px;
+				color: #FF6600;
+				font-size: 35px;
+			}
+			.xuan{
+				border: 2px solid #FF6600;
+			}
+			.xuan>img{
+				display: block;
+			}
+		</style>
+		 <script src="jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		  <div class="box">
+			 <div>
+				 <span>型号</span>
+				 <ul>
+				 	<li class="xuan">
+						4.1英寸
+						<img src="on.png" >
+					</li>
+				 	<li>
+						5.5英寸
+						<img src="on.png" >
+					</li>
+				 </ul>
+			 </div>
+			 <div>
+				 <span>颜色</span>
+				 <ul>
+				 	<li class="xuan">
+						银色
+						<img src="on.png" >
+					</li>
+				 	<li>
+						金色
+						<img src="on.png" >
+					</li>
+					<li>
+						深空灰色
+						<img src="on.png" >
+					</li>
+				 </ul>
+			 </div>
+			 <div>
+			 	<span>内存</span>
+			 		<ul>
+			 			<li class="xuan">
+			 				16GB
+			 			<img src="on.png" >
+			 			</li>
+			 			<li>
+			 				64GB
+			 			<img src="on.png" >
+			 			</li>
+			 			<li>
+			 				128GB
+			 			<img src="on.png" >
+			 			</li>
+			 		</ul>
+			 </div>
+			 <div>
+			 		<span>版本</span>
+			 		<ul>
+			 	      <li class="xuan">
+						  公开版
+						  <img src="on.png" >
+					  </li>
+			 		  <li>
+						 移动赠费版
+						  <img src="on.png" >
+					  </li>
+					  <li>
+						  联通合约版
+						  <img src="on.png" >
+					  </li>
+			 		</ul>
+			 </div>
+			 <hr>
+			 <div class="price">
+				 <span>价格：</span>
+				 <span>&yen &nbsp<span class="pri">5288.00</span></span>
+			 </div>
+		  </div>
+		  <script type="text/javascript">
+		  	$(function(){
+				var num=0
+				$('.box>div').find('li').click(function(){
+					console.log(111)
+					$(this).addClass('xuan').siblings().removeClass()
+					/* 判断型号 */
+					$('.box>div').eq(0).find('li').each(function(a,b){
+						 if($(this).hasClass('xuan')==true){
+							 num=1000+200*a
+							 console.log(a)	
+						 }
+					 
+					})
+					/* 判断颜色 */
+					$('.box>div').eq(1).find('li').each(function(a,b){
+						 if($(this).hasClass('xuan')==true){
+							 num=num+1000+100*a
+							 console.log(a)	
+						 }
+					 
+					})
+					/* 判断内存 */
+					$('.box>div').eq(2).find('li').each(function(a,b){
+						 if($(this).hasClass('xuan')==true){
+							 num=num+2000+300*a
+							 console.log(a)	
+						 }
+					 
+					})
+					/* 判断版本 */
+					$('.box>div').eq(3).find('li').each(function(a,b){
+						 if($(this).hasClass('xuan')==true){
+							 num=num+1288+200*a
+							 console.log(a)	
+						 }
+					})
+					$('.pri').text(num+'.00')
+				})
+			})
+		  </script>
+	</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// ajax配合then
+			
+			function getJson(url){
+				return new Promise(function(resolve,reject){
+					// 进行ajax请求
+					let req = new XMLHttpRequest();
+					
+					// 设置请求
+					req.open('get',url,true)
+					// responseType 设置响应数据类型
+					req.responseType = 'json'
+					
+					// onreadystatechange监听readyState的改变   则自动调用
+					req.onreadystatechange = function(){
+						console.log(this.readyState)
+						// readyState  
+						if(this.readyState != 4){
+							return;
+						}
+						// 判断状态码是否为200
+						if(this.status == 200){
+							// 请求已完成
+							resolve(this.response)
+						}else{
+							// 请求失败
+							reject(new Error(this.readyState));
+						}
+					}
+					
+					// 发送请求
+					req.send(null)
+				})
+			}
+			
+			// let promise = getJson('./wearth.json');
+			
+			// promise.then((value)=>{
+			// 	// 请求成功则调用
+			// 	console.log(value)
+			// },(error)=>{
+			// 	// 操作失败则调用
+			// 	console.log(error)
+			// })
+			
+			
+			getJson('./wearth.json')
+			// 请求成功获取数据   进行解析出有用的数据
+			.then((value)=>{
+				// 请求成功则调用
+				console.log(value)
+				var forecast = value.data.forecast;
+				// console.log(forecast)
+				return forecast;
+			})
+			// 进行页面操作
+			.then((forecast)=>{
+				console.log(forecast)
+				for(var i=0;i<forecast.length;i++){
+					console.log(forecast[i])
+				}
+			})
+			// 返回前面的getJson和前一个函数发生的错误
+			.catch((error)=>{
+				console.log(err)
+			})
+		</script>
+	</body>
+</html>

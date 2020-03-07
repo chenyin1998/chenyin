@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var promise = new Promise(function(resolve,reject){
+				//定义一个随机数模拟网略请求是否成功
+				var num = Math.random()*2;
+				
+				var fn = num>1 ? resolve : reject;
+				
+				var value = num>1 ? '网络获取的数据' : '网络错误'
+				// 定时器模拟异步需要消耗的时间
+				setTimeout(fn,2000,value);
+			})
+			
+			// 使用then监听
+			promise.then((value)=>{
+				console.log(`我是成功的回调:${value}`)
+			},(error)=>{
+				console.log(`我是失败的回调:${error}`)
+			})
+		</script>
+	</body>
+</html>

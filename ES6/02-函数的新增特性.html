@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// ES5中默认值
+			function fun(a,b){
+				a = a || 10;//写法有一个bug  若传入的实参为0,则a仍然等于10
+				console.log(a,b)
+			}
+			
+			fun(0)
+			
+			// ES6中新增'默认值'的支持
+			function demo(a=10,b=20){
+				console.log(a,b)
+			}
+			
+			demo(3,5)//3 5
+			demo();//10 20
+			demo(0,0);//0 0
+			
+			
+			// 在ES5的非严格模式下,arguments总能反映出命名参数的变化
+			function foo(a,b){
+				//接收所有传入的实参,以数组的方式返回
+				console.log(arguments)
+				console.log(arguments[0] === a);//true
+				console.log(arguments[1] === b);//true
+				
+				a = 10;
+				b = 20;
+				
+				console.log(arguments[0] === a);//true
+				console.log(arguments[1] === b);//true
+				console.log(arguments)
+			}
+			foo(1,2)
+			
+			// 在ES5的严格模式下,arguments只能反应参数的初始值,不再反应命名参数的变化
+			function foo(a,b){
+				// 严格模式
+				'use strict'
+				
+				//接收所有传入的实参,以数组的方式返回
+				console.log(arguments)
+				console.log(arguments[0] === a);//true
+				console.log(arguments[1] === b);//true
+				
+				a = 10;
+				b = 20;
+				
+				console.log(arguments[0] === a);//false
+				console.log(arguments[1] === b);//false
+				console.log(arguments)
+			}
+			foo(1,2)
+			
+			//在ES6中若有参数默认值,不管是在严格模式还是非严格模式,都和ES5中的严格模式相同
+			function foo(a,b=30){
+				
+				//接收所有传入的实参,以数组的方式返回
+				console.log(arguments)
+				console.log(arguments[0] === a);//true
+				console.log(arguments[1] === b);//true
+				
+				a = 10;
+				b = 20;
+				
+				console.log(arguments[0] === a);//false
+				console.log(arguments[1] === b);//false
+				console.log(arguments)
+			}
+			foo(1,2)
+		</script>
+	</body>
+</html>

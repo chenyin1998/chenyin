@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var arr = [2,4,3,4,3,4,3];
+			function demo(arr){
+				var newArr = [];
+				for(var i=0;i<arr.length;i++){
+					// 判断数组中的值是否存在
+					if(newArr.indexOf(arr[i])<0){
+						newArr.push(arr[i])
+					}
+				}
+				// console.log(newArr)
+				return newArr;
+				
+			}
+			
+			var newArr = demo(arr)
+			console.log(newArr)
+		</script>
+	</body>
+</html>

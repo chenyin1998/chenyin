@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/* 阶乘的计算 */
+			 function run(a){
+				 if(a>0){
+					return a*run(a-1) 
+				 }else{
+					 return 1
+				 }
+			 }
+			 var res=run(10)
+			 console.log(res)
+			/* 数组去重 */
+			function rd(arr){
+				var nl=[]
+				nl.push(arr[0])
+				for(var i=1;i<arr.length;i++){
+					nl.push(arr[i])
+					for(var j=0;j<nl.length-1;j++){
+						 if(arr[i]==nl[j]){
+							nl.pop() 
+						} 
+					}
+				}
+				return nl
+			}
+			var arr=[1,5,3,2,1,5,5,3,1]
+			var res=rd(arr)
+			console.log(res)
+			/* set去重方法 */
+			var arr=[1,5,3,2,1,5,5,3,1]
+			var res=new Set(arr)
+			console.log(res)
+		</script>
+	</body>
+</html>

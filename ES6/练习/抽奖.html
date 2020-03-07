@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			li{
+				list-style: none;
+			}
+				
+			body {
+			overflow-x:hidden;
+			overflow-y:hidden;
+			} 
+			.box{
+				width: 560px;
+				height: 560px;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				right: 0px;
+				bottom: 0px;
+				margin: auto;
+				text-align: center; 
+				font-size: 20px;
+				font-weight: 600;
+				line-height: 20px;
+				color: white;
+				transition: all 5s ease;
+			}
+			.box>img{
+				position:relative;
+				
+			}
+			.box>img:nth-child(2){
+				position:absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+			}
+			.box>div{
+				width: 93px;
+				height: 280px;
+				position: absolute;
+				left: 233.5px;
+				top: 0px;
+				transform-origin: 50% 100%;
+				transform: rotateZ(-22.5deg);
+				
+			}
+			.box>div>span{
+				display: block;
+				margin-top: 26px;
+			}
+			.box>div>span:nth-child(2){
+				display: block;
+				margin-top: 5px;
+			}
+			.stat{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+			}
+			.stat>img{
+				position: relative;
+				
+			}
+			.stat>img:nth-child(1){
+				cursor: pointer;
+			}
+			.stat>img:nth-child(2){
+				position: absolute;
+				top: -32px;
+				left: 57px;
+			}
+		</style>
+		<script src="jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="box">
+			<img src="img/bg_lottery.png" >
+			<img src="img/bg_lottery_f.png" >
+			
+		</div>
+		<div class="stat">
+		    <img src="img/btn_lottery.png" class="btn">
+			<img src="img/icon_point.png" >
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			var arrImg=[
+				'img/lottery_01.png',
+				'img/lottery_02.png',
+				'img/lottery_03.png',
+				'img/lottery_04.png',
+				'img/lottery_05.png',
+				'img/lottery_06.png',
+				'img/lottery_07.png',
+				'img/lottery_08.png'
+			]
+			var arrText=[
+				'京东卡',
+				'京东卡',
+				'京东卡',
+				'京东卡',
+				'谢谢参与',
+				'京东卡',
+				'京东卡',
+				'IQOOpro',
+			]
+			var arrMo=[
+				'10元',
+				'20元',
+				'50元',
+				'100元',
+				'',
+				'200元',
+				'500元',
+				'手机',
+			]
+		  class Run{
+				constructor(arrImg,arrText,arrMo) {
+				    this.arrImg=arrImg
+					this.arrText=arrText
+					this.arrMo=arrMo
+				}
+				/* 遍历创建 */
+			creat(obj){
+				for(var i in arrImg){
+				$('.box').append(`
+				<div>
+					<span>${this.arrText[i]}</span>
+					<span>${this.arrMo[i]}</span>
+					<img src="${this.arrImg[i]}" >
+				</div>
+				`)
+				obj.find('div').last().css({'transform':'rotateZ('+(-22.5+45*i)+'deg)'})
+				
+			}
+			
+				}
+				/* 点击开始 */
+			start(obj){
+				obj.click(()=>{
+				/* 判断是否点击 */
+				if(obj.prop('name')===''){
+				obj.prop('name','false')
+				var num=-Math.floor(Math.random()*360+1080)
+				$('.box').css('transform','rotateZ('+num+'deg)')
+				num=num+1080
+				num=Math.ceil(num/45) 
+				num=Math.abs(num)
+				setTimeout(()=>{
+					if(num==7){
+						alert(this.arrText[0]+arrMo[0])
+					}else{
+						alert(this.arrText[num+1]+this.arrMo[num+1])
+					}
+				},5000)
+				}
+			})
+				}
+			}
+			var run=new Run(arrImg,arrText,arrMo)
+			run.creat($('.box'))
+			run.start($('.btn'))
+		})
+	</script>
+</html>

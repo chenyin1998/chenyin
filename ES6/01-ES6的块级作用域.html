@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{margin:0;padding:0}
+			ul{list-style:none;}
+			ul>li{width:300px;height:80px;background:#ccc;margin:2px auto;}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+		<script>
+			// {}代表一个块级作用域
+			{
+				var a = 10;
+				
+				// 变量b只能在代码块内访问
+				let b = 20;
+				console.log(b)//20
+			}
+			
+			console.log(a)//10
+			// console.log(b)// b is not defined
+			
+			// let不存在变量提升
+			// ES5的var
+			console.log(num)//undefined
+			var num = 22;//声明提前,但赋值并未提前
+			
+			// ES6中let
+			// console.log(age)//报错
+			let age = 18;
+			// console.log(age)
+			
+			
+			// ES5中var声明的变量属于window对象
+			console.log(window.num)//22
+			
+			// ES6中let声明的变量不属于window
+			console.log(window.age)//undefined
+			
+			// ES5中变量名可以重复
+			var num = 50;
+			console.log(num)//50
+			
+			// ES6中变量名不能重复
+			// let age = 30;//'age' has already been declared
+			
+			// const声明的是常量
+			const key = '天王盖地虎';
+			console.log(key)
+			
+			// const声明的变量不可以修改
+			// key = '小鸡炖蘑菇';//Assignment to constant variable.
+			
+			
+			// 循环中的函数
+			var oLi = document.getElementsByTagName('li');
+			console.log(oLi)
+			
+			// ES5
+			// for(var i=0;i<oLi.length;i++){
+			// 	// 函数会先加载,事件是触发时才执行
+			// 	oLi[i].onclick = function(){
+			// 		console.log(i)//4
+			// 		// oLi[i].style.background = 'orange';//报错
+			// 		this.style.background = 'orange'
+			// 	}
+			// }
+			
+			
+			// ES6
+			for(let i=0;i<oLi.length;i++){
+				oLi[i].onclick = function(){
+					console.log(i)
+					oLi[i].style.background = 'orange';
+				}
+			}
+			
+			/* 
+			 注意：let声明变量每次迭代(循环)都会创建一个变量i,所有循环内部的函数都会得到各自的变量i的拷贝，每次拷贝都会在迭代开始时被创建和赋值
+			 */
+		</script>
+	</body>
+</html>

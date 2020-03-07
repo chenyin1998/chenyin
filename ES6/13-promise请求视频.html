@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// loadVideoAsync()函数主要为异步加载视频  url为视频的地址
+			function loadVideoAsync(url){
+				return new Promise(function(resolve,reject){
+					let video = document.createElement('video');
+					video.src = url;
+					video.controls = 'controls';
+					console.log(video)
+					
+					// 监听视频是否加载成功
+					video.onloadedmetadata = function(){
+						// 加载成功后调用resolve
+						resolve(video)
+					}
+					
+					// 监听失败
+					video.onerror = function(){
+						reject(new Error('Could not load video at'+url))
+					}
+				})
+			}
+			
+			
+			
+			let promise = loadVideoAsync('http://vali.cp31.ott.cibntv.net.302.myalicdn.com/youku/65734188ea24a71e9eb373995/03000801005D64A8D5FDBDF003E880D60D52C1-7C4F-48B2-BE7C-0D234DD20BCA.mp4?sid=158337466900010006066_00_Aff25c5b04562c7620dbd378e2d87650b&sign=09d964f54d9cbd0794c3131f4b507ed6&ctype=50&ali_redirect_domain=vali.cp31.ott.cibntv.net&ali_redirect_ex_ftag=bec6ec52f64db7293aaaa2f225ec06b9893ae2bd8c1d7372&ali_redirect_ex_tmining_ts=1583374734&ali_redirect_ex_tmining_expire=3600&ali_redirect_ex_hot=11')
+			
+			// 通过then方法监听
+			promise.then((value)=>{
+				document.body.appendChild(value)
+			},(error)=>{
+				console.error(error)
+			})
+			
+		</script>
+	</body>
+</html>

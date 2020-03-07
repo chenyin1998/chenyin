@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// ES5 
+			var test = function(value){
+				return value;
+			}
+			
+			// ES6 箭头函数定义
+			var func = (value)=>{return value}
+			
+			// 当箭头函数的形参只有一个时,包含形参的()可以省略,其他情况都不能省略
+			// 当箭头函数后只有一行代码且不加大括号{},则自带return 功能
+			var func =value=>value;//等价于 var func = (value)=>{return value}
+			
+			// 示例二:return对象在箭头后用小括号将对象包含
+			
+			// ES5返回值为对象
+			var func = function(){
+				// var obj = {
+				// 	name:'小明',
+				// 	age:18
+				// }
+				// return obj;
+				
+				return {
+					name:'小明',
+					age:18
+				};
+			}
+			console.log(func())//{name: "小明", age: 18}
+			
+			// ES6的箭头函数改写
+			var func = ()=>({name:'小明',age:18});
+			console.log(func())//{name: "小明", age: 18}
+			
+			// 示例三:使用箭头函数实现自执行
+			var person = ((name,age)=>{
+				console.log(name,age)
+			})('小明',18)
+			
+		</script>
+	</body>
+</html>
