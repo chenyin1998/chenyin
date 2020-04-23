@@ -1,0 +1,84 @@
+02月11日早上点名
+https://www.wjx.cn/jq/56635809.aspx
+
+
+02月11日下午点名
+https://www.wjx.cn/jq/56764071.aspx
+
+
+ajax的测试地址
+
+get请求
+http://api.kangliuyong.com:9002/pros
+
+可传参参数, 比如获取10条数据
+http://api.kangliuyong.com:9002/pros?count=10
+
+post请求，参数必填 id=1203
+http://api.kangliuyong.com:9002/address
+
+ajax是异步的javascript和xml
+
+ajax具有异步也有同步
+
+xml：可扩展的标记语言，标签可以自定义
+
+<teacher></teacher>
+
+ajax不是新的编程语言，而是一种现有的标准新方法
+
+ajax作用：在没有刷新整个页面的情况下，可以实现局部更新数据
+
+
+XMLHttpRequest(): 创建ajax实例
+
+创建ajax
+  1、创建ajax对象
+  2、监听ajax状态码变化
+  3、创建服务器连接
+  4、发起ajax请求
+
+ajax状态码
+  0：请求未初始化(还没有建立服务器连接)，ajax实例已经生成 new XMLHttpRequest()，open方法没有调用
+  1：服务器已经建立连接, open方法已经调用，没有执行send方法
+  2：请求已接收，执行send方法
+  3：请求处理中，服务器处理ajax请求的参数
+  4：请求已完成并响应成功，服务器数据已经完全接收
+
+
+常用http状态码
+  200：正常
+  304：服务器资源未修改
+  401：未授权
+  403：禁止访问
+  404：找不到资源
+  500：服务器程序出错
+
+
+get请求 vs post请求
+
+get: 一般用于获取数据
+    参数需要以?为连接符挂载到地址后面 xxxx?参数名1=值1&参数名2=值2
+    不会进行字符编码
+    请求地址具有大小限制（浏览器限制）,不同浏览器限制大小一致
+
+
+post: 一般用于修改资源或者添加资源
+    参数保存在请求体
+    对字符编码
+    请求地址和参数没有大小限制（浏览器不限制）（后台可以限制请求大小）
+
+
+
+作业懒加载商品数据
+
+音乐接口
+https://messoer.github.io/mess-api-doc/#/
+
+
+
+下午的内容
+  封装ajax
+  同源策略
+  jsonp
+  jquery ajax
